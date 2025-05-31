@@ -62,8 +62,14 @@ const QuestionnairePage: React.FC = () => {
         alert("Responda todas as perguntas antes de enviar.");
         return;
       }
+
+      console.log("Tentando salvar as respostas:", answers);
+
       const profile = Object.entries(answers).reduce((a, b) => (b[1] > a[1] ? b : a))[0];
       await saveAnswers(answers);
+
+      console.log("Respostas salvas com sucesso. Redirecionando...");
+
       navigate("/resultado", { state: { profile, scoreByProfile: answers } });
     } catch (err) {
       alert("Erro ao salvar respostas. Verifique sua conexão e tente novamente.");
@@ -131,7 +137,7 @@ const QuestionnairePage: React.FC = () => {
           <button
             className="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 ml-auto"
             onClick={handleSubmit}
-          >
+         >
             Finalizar e enviar respostas
           </button>
         )}
